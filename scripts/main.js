@@ -99,13 +99,46 @@ input.addEventListener('input', (e) =>{
 
 if(e.target.value.length >= 3){
     sectionRecipes.innerHTML = '';
-    let newData = findByOld(recipes, e.target.value);
+    let newData = findByPrincipal(recipes, e.target.value);
     displayRecipe(newData)
 }else{
     sectionRecipes.innerHTML = '';
     displayRecipe(recipes);
 }
 })
+
+//=============fonction tri avec l'input principal (filter)==============
+
+function findByPrincipal(data, requete){
+    if(requete.includes(' ')){
+        console.log('ya un espace')
+    }
+        return data.filter((el) =>{
+            let title = el.name;
+            let desc = el.description;
+            let ingred = el.ingredients;
+    
+            let resultTitle = title.toLowerCase().indexOf(requete.toLowerCase())!== -1;
+            let resultDesc = desc.toLowerCase().indexOf(requete.toLowerCase())!== -1;
+    
+            let resultIngred = ingred.map((i) => i.ingredient.toLowerCase().indexOf(requete.toLowerCase())!== -1);
+            if(resultIngred.includes(true)){
+                console.log(resultIngred, el)
+                return el
+            }  
+            
+            /* for(let i of ingred){
+                let listIngred = i.ingredient;
+                
+                const resultIngred = listIngred.toLowerCase().indexOf(requete.toLowerCase())!== -1;
+                if(resultIngred){
+                    return el
+                }
+            }   */ 
+    
+            return resultTitle, resultDesc ;
+        })
+    }
 
 //=============fonction tri avec l'input principal (for)==============
 
