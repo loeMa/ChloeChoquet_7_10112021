@@ -107,7 +107,40 @@ if(e.target.value.length >= 3){
 }
 })
 
+//=============fonction tri avec l'input principal (for)==============
 
+function findByOld(data, requete){
+    let arrtest = []
+    for(let i in data){
+        let arr = data[i];
+        let title = arr.name;
+        let desc = arr.description;
+        let ListIngred = arr.ingredients;
+        
+        const resultTitle = title.toLowerCase().includes(requete.toLowerCase());
+        const resultDesc = desc.toLowerCase().includes(requete.toLowerCase());
+
+        for(let j in ListIngred){
+            let ingred = ListIngred[j].ingredient;
+            
+            const resultIngred = ingred.toLowerCase().includes(requete.toLowerCase());
+            if(resultIngred){
+                arrtest.push(data[i]);
+                console.log(data[i]);
+            } 
+        }
+
+        if(resultTitle){
+            arrtest.push(data[i]);
+            console.log(title,arrtest);
+
+        }else if(resultDesc){
+            arrtest.push(data[i]);
+        }
+    }
+    console.log(arrtest);
+    return arrtest;
+}
 
 
 
