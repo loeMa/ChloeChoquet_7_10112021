@@ -99,23 +99,21 @@ displayRecipe(recipes);
 
 input.addEventListener('input', (e) =>{
     e.preventDefault();
-
-if(e.target.value.length >= 3){
-    
-    let newData = findByPrincipal(recipes, e.target.value);
-    
-    displayRecipe(newData)
-}else{
-    
-    displayRecipe(recipes);
-}
+    if(e.target.value.length >= 3){
+        
+        let newData = findByPrincipal(recipes, e.target.value);
+        displayRecipe(newData);
+    }else{
+        
+        displayRecipe(recipes);
+    }
 })
 
 //=============fonction tri avec l'input principal (filter)==============
 
 function findByPrincipal(data, requete){
     if(requete.includes(' ')){
-        console.log('ya un espace')
+        console.log('ya un espace');
     }
         return data.filter((el) =>{
             let title = el.name;
@@ -127,7 +125,7 @@ function findByPrincipal(data, requete){
     
             let resultIngred = ingred.map((i) => i.ingredient.toLowerCase().indexOf(requete.toLowerCase())!== -1);
             if(resultIngred.includes(true)){
-                return el
+                return el;
             }  
             
             /* for(let i of ingred){
@@ -140,7 +138,7 @@ function findByPrincipal(data, requete){
             }   */ 
             
 
-            return resultTitle, resultDesc ;
+            return resultTitle, resultDesc;
         })
     }
 
@@ -152,14 +150,14 @@ let listIngredients = [];
 recipes.forEach((recette) => {
     listAppliances.push(recette.appliance);
     recette.ustensils.forEach((e) => listUstensils.push(e));
-    recette.ingredients.forEach((e) => listIngredients.push(e.ingredient))
+    recette.ingredients.forEach((e) => listIngredients.push(e.ingredient));
 })
 let arrayAppliances =  [...new Set(listAppliances)];
-let arrayUstensils = [...new Set(listUstensils)]
-let arrayIngredients = [...new Set(listIngredients)]
+let arrayUstensils = [...new Set(listUstensils)];
+let arrayIngredients = [...new Set(listIngredients)];
 
-//==============list des ingredients=====================
 
+//==============Filtre par bouton tag=====================
 
 const filterRecipe = (filters) =>{
     let filtArr = recipes;
@@ -172,7 +170,7 @@ const filterRecipe = (filters) =>{
 
             if(filter.type == "requete"){
                 //
-            console.log(filter.type)
+            console.log(filter.type);
 
             }if(filter.type == "ingredients" ){
                 for(let i of ingredientFilter){
@@ -182,22 +180,22 @@ const filterRecipe = (filters) =>{
                     if(resultIngred){
                         filtArr = recette;
                         
-                        return filtArr
+                        return filtArr;
                     }
                 } 
 
             }if(filter.type == "appareils" && recette.appliance.includes(filter.value) ){
                 arrayAppliances= [recette.appliance];
                 
-                return true
+                return true;
 
             }else{
                 console.log('pas bien');
-                return false
+                return false;
             }
         })
     })
-    displayRecipe(filtArr)
+    displayRecipe(filtArr);
     filtArr.forEach((item) =>{
         item.ingredients.forEach((e) => listIngredients.push(e.ingredient));
         listAppliances.push(item.appliance);
@@ -205,52 +203,38 @@ const filterRecipe = (filters) =>{
         arrayAppliances =  [...new Set(listAppliances)];
         
     })
-    domCheckbox(arrayAppliances, listBlockAppareil, 'appareils')
-    domCheckbox(arrayIngredients, dropdownIngredUl, 'ingredients');
-    addSpan()
-    
-    //
-    
-    
-    console.log(arrayAppliances)
-    
-    return true
+    domSpan(arrayAppliances, listBlockAppareil, 'appareils');
+    domSpan(arrayIngredients, dropdownIngredUl, 'ingredients');
+    addSpan();
+
+    console.log(arrayAppliances);
+    return true;
 }
 
-function addSpan(){
-    span.forEach((e) =>{
-        //e.classList.add(id); 
-        tagDom(e);
-    })
-}
+
 //===========declaration variables===============
 
 const dropdownIngredBtn = document.querySelector('#arrow1__btn');
 const dropdownIngredUl = document.querySelector('.dropdownIngred__list');
 const arrow1 = document.getElementById('arrow1');
 const arrowUp = document.querySelector('arrowUp');
-let dropdownIngredList;
-let listBtn;
-let span;
-let li;
-let aIngred;
-
-//let filtreArr = [];
-
-let allRecipes = Array.from(recipes);
-
-
 const appareilBtn = document.querySelector('#arrow2__btn');
 const arrow2 = document.getElementById('arrow2');
 const listBlockAppareil = document.querySelector('.list__block');
-
 const filterTagBlock = document.querySelector('.filterTag');
+let span;
+let filtersArray = [];
+let filtersBox = {};
+let arrayInput = [];
 
+//===========lancement dom span et displayTag===============
+
+domSpan(arrayAppliances, listBlockAppareil, 'appareils');
+domSpan(arrayIngredients, dropdownIngredUl, 'ingredients');
+addSpan()
 
 //===========au click du filtre appareil===============
 
-domCheckbox(arrayAppliances, listBlockAppareil, 'appareils')
-addSpan( )
 appareilBtn.addEventListener('click', (e) =>{
     arrow2.classList.toggle('arrowUp');
     
@@ -263,7 +247,6 @@ appareilBtn.addEventListener('click', (e) =>{
 })
 
 //===========au click du filtre Ingredient===============
-domCheckbox(arrayIngredients, dropdownIngredUl, 'ingredients');
 
 dropdownIngredBtn.addEventListener('click', (e) =>{
     
@@ -278,198 +261,74 @@ dropdownIngredBtn.addEventListener('click', (e) =>{
     }
     
 })
-let filtersArray = [];
-let filtersBox = {};
-let arr = []
 
-function domTag(data){
+//===========pour chaque span on lance displayTag===============
+
+function addSpan(){
+    span.forEach((e) =>{ 
+        DisplayTag(e);
+    })
+}
+
+//===========creation du dom tag===============
+
+function tagDom(data){
     const tag = document.createElement('button');
-    tag.value = data.target.id
+    tag.value = data.target.id;
     tag.classList.add('filterTag__btn');
     tag.innerHTML = `<p>${data.target.id}</p> <a class="filterTag--close"><img  src="./assets/icons/xmarkRound.svg" alt="cancel filter"/></a>`;
     filterTagBlock.appendChild(tag);
 }
+
 //===========Création des tag et filtrage el===============
 
-function tagDom(data, array){
+function DisplayTag(data){
 
     data.addEventListener('click', (i) =>{
         span.forEach((e) =>{
             e.remove();
         })
-    arr.push(data)
+        arrayInput.push(data);
 
-        const id =document.getElementById(i.target.id);
+        filtersBox = {'type' : i.target.classList[1], 'value' : i.target.id};
+        filtersArray.push(filtersBox);
+        let newTest = filterRecipe(filtersArray);
 
-            filtersBox = {'type' : i.target.classList[1], 'value' : i.target.id}
-            filtersArray.push(filtersBox)
-
-            let newTest = filterRecipe(filtersArray)
-            
-            console.log(filtersArray)
-            domTag(i)
-            /* const tag = document.createElement('button');
-            tag.value = i.target.id
-            tag.classList.add('filterTag__btn');
-            tag.innerHTML = `<p>${i.target.id}</p> <a class="filterTag--close"><img  src="./assets/icons/xmarkRound.svg" alt="cancel filter"/></a>`;
-            filterTagBlock.appendChild(tag); */
-            //i.target.parentNode.style.display = "none";
-
-            const tagClose = document.querySelectorAll('.filterTag--close');
-            
-            
-            tagClose.forEach((event) =>{
+        tagDom(i);
                 
-                event.addEventListener('click', () =>{
-
-                    event.parentNode.remove();
-                    let idInput = arr.find((input) => input.id == event.parentNode.value);
-                    console.log(idInput)
-                    idInput.style.display = "block";
-                    idInput.checked = false;
-                    span.forEach((e) =>{
-                        e.remove();
-                    })
-                    /* arr = arr.filter(item => item.id != idInput.id)
-                    console.log(arr) */
-
-                    filtersArray = filtersArray.filter((item) => item.value != event.parentNode.value );
-                    console.log(filtersArray)
-                    filterRecipe(filtersArray); 
-                    
+        const tagClose = document.querySelectorAll('.filterTag--close');
+        tagClose.forEach((event) =>{
+            event.addEventListener('click', () =>{
+                event.parentNode.remove();
+                let idInput = arrayInput.find((input) => input.id == event.parentNode.value);
+                idInput.style.display = "block";
+                idInput.checked = false;
+                span.forEach((e) =>{
+                    e.remove();
                 })
-            }) 
-
-        
+                filtersArray = filtersArray.filter((item) => item.value != event.parentNode.value );
+                filterRecipe(filtersArray); 
+            })
+        }) 
     }) 
 }
 
-//===========afficher liste ingredients===============
 
+//===========afficher listes span===============
 
-function showItems(data){
-    
-    let limited = [];
-    let array = [];
-    data.forEach((e) =>{
-        let ingredient = e.ingredients;
-        ingredient.forEach((i) =>{
-            if(!array.includes(i.ingredient.toLowerCase())){
-                array.push(i.ingredient.toLowerCase())
-            }else{
-                console.log('nop')
-            }
-        })
-    }) 
-    limited = array.slice(0, 30)
-    limited.forEach((e) =>{
-        
-        //const liIngred = document.createElement('div');
-        const aIngred = document.createElement('li');
-        const labelIngred = document.createElement('label');
-        labelIngred.setAttribute('for', e) ;
-        const checkbox = document.createElement('input')
-        checkbox.type = 'checkbox';
-        checkbox.name = 'ingredients';
-        checkbox.id = e;
-        checkbox.value = e;
-        //liIngred.classList.add('dropdownIngred__list');
-        aIngred.classList.add('dropdownIngred__list');
-
-        labelIngred.innerHTML = e;
-        
-        //dropdownIngredUl.appendChild(liIngred);
-        dropdownIngredUl.appendChild(aIngred);
-        aIngred.appendChild(labelIngred)
-        aIngred.appendChild(checkbox)
-        
-    })
-    //dropdownIngredList = document.querySelectorAll('.dropdownIngred__list');
-    checkbox = document.querySelectorAll('input[type= "checkbox"]');
-    aIngred = document.querySelectorAll('.dropdownIngred__list')
-}
-
-
-//===========afficher liste appareils===============
-
-function showAppareil(data){
-    /* let array = [];
-    data.forEach((e) =>{
-        let appareil = e.appliance;
-
-        if(!array.includes(appareil)){
-            array.push(appareil)
-        }else{
-            console.log('nop')
-        }
-    }) 
-    array.forEach((e) =>{
-        const labelAppareil = document.createElement('label');
-        const liAppareil = document.createElement('li');
-        labelAppareil.setAttribute('for', e);
-        const listBtn = document.createElement('input');
-        listBtn.type = 'checkbox';
-        listBtn.name = 'appareils';
-        listBtn.id = e;
-        listBtn.value = e;
-        liAppareil.classList.add('list__items');
-        
-        labelAppareil.innerHTML = e;
-
-        listBlockAppareil.appendChild(li);
-        liAppareil.appendChild(labelAppareil);
-        liAppareil.appendChild(listBtn) ;
-        
-    })
-    checkbox = document.querySelectorAll('input[type= "checkbox"]');
-    listBtn = document.querySelectorAll('.list__items'); */
-    
-    
-}
-
-
-function domCheckbox(data, ul, addClass){
+function domSpan(data, ul, addClass){
 let limited = [];
-    limited = data.slice(0, 30)
+    limited = data.slice(0, 30);
     
     limited.forEach((e) =>{
-
         const span = document.createElement('span');
-        
         span.id = e;
         span.innerHTML = e;
-        
         span.classList.add('list__items');
         span.classList.add(addClass);
         
         ul.appendChild(span);
-        
     })
-    
-    span = document.querySelectorAll('.list__items')
+    span = document.querySelectorAll('.list__items');
 }
 
-/* let limited = [];
-    limited = data.slice(0, 30)
-    limited.forEach((e) =>{
-
-        const label = document.createElement('label');
-        const li = document.createElement('li');
-        const checkbox = document.createElement('input')
-        label.setAttribute('for', e) ;
-        checkbox.type = 'checkbox';
-        checkbox.id = e;
-        checkbox.value = e;
-        
-        li.classList.add('list__items');
-
-        label.innerHTML = e;
-        
-        ul.appendChild(li);
-        
-        li.appendChild(label)
-        li.appendChild(checkbox) 
-        
-    })
-    checkbox = document.querySelectorAll('input[type= "checkbox"]');
-    li = document.querySelectorAll('.list__items') */
