@@ -290,6 +290,7 @@ h2{
     border-radius: 5px;
     list-style: none;
     margin: 0 20px;
+    height: 70px;
     
 }
 .appareil__header{
@@ -331,7 +332,27 @@ h2{
     font-weight: 400;
     cursor : pointer;
 }
+/* ==============Ustensils========= */
 
+.ustensils{
+    background-color: #68D9A4;
+    padding: 2% 2%;
+    border-radius: 5px;
+    list-style: none;
+    margin: 0 20px;
+    height: 70px;
+}
+.list__block--ustensils{
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 3%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+}
+
+/* ==============tags========= */
 
 .filterTag{
     display: flex;
@@ -352,3 +373,4 @@ h2{
     font-size: 14px;
     font-weight: 700;
 }
+
