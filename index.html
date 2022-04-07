@@ -20,51 +20,50 @@
     </header>
     <main>
 
-        <section class="search">
+        <div class="search">
             <form>
                 <label for="inputSearch"></label>
                 <input type="text" id="inputSearch" class="search__input" placeholder="Rechercher une recette">
-                <img class="search__img" src="/assets/img/loupe.png" alt="">
-                <h2 class="error"></h2>
+                <img class="search__img" src="/assets/img/loupe.png" alt="search icon">
+                <p class="error"> </p>
             </form>
             
-        </section>
-        <section class="filters__block">
+        </div>
+        <div class="filters__block">
             <div class="filterTag"></div>
             
             <div class="filters">
-                <div class="dropdownIngred" >
+                <div class="ingredients__section" >
                     
-                    <div class="dropdownIngred__header"><input type="text" class="dropdownIngred__search requete" placeholder="Ingredients">
-                        <button id="arrow1__btn" class="arrow__btn"><img class="arrow" id="arrow1" src="./assets/icons/arrow.svg"></button>
+                    <div class="filters__header"><input type="text" class="filters__search requete" placeholder="Ingredients">
+                        <button id="arrow1__btn" class="arrow__btn"><img class="arrow" id="arrow1" src="./assets/icons/arrow.svg" alt="open dropdown Ingredient"></button>
                     </div>
                     
-                        <div class="dropdownIngred__list"> 
-                       <!--  <li class="dropdownIngred__list"><a href="#" class="dropdownIngred__list--btn"></a></li> -->
-                       </div>
+                        <div class="list__block" id="ingredientsBlock"> 
+                        </div>
                     
                 </div>
-                <div class="appareil">
-                    <div class="appareil__header"><input type="text" class="appareil__search requete" placeholder="Appareils">
-                        <button id="arrow2__btn" class="arrow__btn"><img class="arrow" id="arrow2" src="./assets/icons/arrow.svg"></button>
+                <div class="appareils__section">
+                    <div class="filters__header"><input type="text" class="filters__search requete" placeholder="Appareils">
+                        <button id="arrow2__btn" class="arrow__btn"><img class="arrow" id="arrow2" src="./assets/icons/arrow.svg" alt="open dropdown Appliances"></button>
                     </div>
-                    <div class="list__block">                       
+                    <div class="list__block" id="appliancesBlock">                       
                     </div>
                 </div>
-                <div class="ustensils">
-                    <div class="appareil__header"><input type="text" class="appareil__search requete" placeholder="Ustensiles">
-                        <button id="arrow3__btn" class="arrow__btn"><img class="arrow" id="arrow3" src="./assets/icons/arrow.svg"></button>
+                <div class="ustensils__section">
+                    <div class="filters__header"><input type="text" class="filters__search requete" placeholder="Ustensiles">
+                        <button id="arrow3__btn" class="arrow__btn"><img class="arrow" id="arrow3" src="./assets/icons/arrow.svg" alt="open dropdown Ustensils"></button>
                     </div>
-                    <div class="list__block--ustensils">                       
+                    <div class="list__block" id="ustensilsBlock">                       
                     </div>
                 </div>
             
             
         </div>
 
-        </section>
+        </div>
         
-        <section class="recipes"></section>
+        <div class="recipes"></div>
 
     </main>
     <script src="scripts/main.js" type="module"></script>

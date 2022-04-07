@@ -20,7 +20,7 @@ h1{
     margin: 0;
 }
 
-h2{
+.search p{
     font-size: 18px;
     font-family: 'Lato', sans-serif;
 }
@@ -74,6 +74,9 @@ h2{
     justify-content: space-between;
     margin: 5% 0;
     padding: 2% 0;
+    position: absolute;
+    top: 400px;
+    margin: 5% 100px 5% 0;
 }
 
 .recipes__article{
@@ -160,7 +163,7 @@ h2{
 }
 
 
-/*=============les filtres============ */
+/*=============les filtres générals============ */
 
 .filters__block{
     display: flex;
@@ -175,146 +178,31 @@ h2{
     position: relative;
     display: flex;
     flex-direction: row;
+    z-index: 1;
 }
 
-.dropdownIngred{
-    min-width: 170px;
-    height: 70px;
-    padding: 0 15px;
-    background-color: #3282F7;
-    border-radius: 5px;
-    list-style: none;
-    width: 170px;
-}
-
-.dropdownIngred__header{
-    height: 100%;
+.filters__header{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
+    width: 100%;
 }
 
-.dropdownIngred ul{
-    padding: 0;
-    background-color: #3282F7; 
-    
-    grid-template-columns: repeat(3, 1fr);
-    list-style: none;
-    min-width: 170px;
-    position: absolute;
-    left: 0px;
-    margin-top: -4px;
-    border-radius: 0 0 5px 5px;
-    display: none;
-    /* visibility: hidden; */
-}
-
-.dropdownIngred__list{
-    padding: 5% 0;
-    
-    background-color: #3282F7; 
-    
-    grid-template-columns: repeat(3, 1fr);
-    list-style: none;
-    min-width: 170px;
-    position: absolute;
-    left: 0px;
-    margin-top: -4px;
-    border-radius: 0 0 5px 5px;
-    display: none;
-
-}
-
-.dropdownIngred--open{
-    visibility: hidden;
-    
-}
-
-.dropdownIngred span{
-    text-decoration: none;
-    color: white;
-    padding:0.4em;
-    font-weight: 400;
-    cursor : pointer;
-}
-
-.dropdownIngred__list input{
-    /* display: none; */
-    /* visibility: hidden;  */
-}
-
-.dropdownIngred__search{
+.filters__search{
     width: 100%;
     border: none;
     background: none;
     height: 30px;
-}
-
-.dropdownIngred__search::placeholder{
-    opacity: 100%;
     font-size: 18px;
     font-family: 'Lato', sans-serif;
     color: white;
     font-weight: 700;
 }
 
-
-/* .dropdownIngred__list--open{
-    
-    opacity: 1;
-    display: block;
-    color: white;
-    background-color: #3282F7;
-} */
-
-
-/* ==============Arrow========= */
-.arrow__btn{
-    background: none;
-    border: none;
-    vertical-align: middle;
-}
-.arrow{
-    width: 20px;
-    height: 20px;
-    transition: transform 300ms ease-in-out
-}
-.arrowUp{
-    transform: rotateX(180deg);
-}
-/* ==============Appareil========= */
-.appareil{
-    background-color: #68D9A4;
-    padding: 2% 2%;
-    border-radius: 5px;
-    list-style: none;
-    margin: 0 20px;
-    height: 70px;
-    
-}
-.appareil__header{
-    display: flex;
-}
-
-.appareil__search{
-    width: 100%;
-    border: none;
-    background: none;
-    height: 30px;
-}
-
-.appareil__search::placeholder{
+.filters__search::placeholder{
     opacity: 100%;
     font-size: 18px;
     font-family: 'Lato', sans-serif;
     color: white;
     font-weight: 700;
-}
-
-.appareil__btn{
-    background: none;
-    border: none;
 }
 
 .list__block{
@@ -332,24 +220,64 @@ h2{
     font-weight: 400;
     cursor : pointer;
 }
+
+/* ==============Ingredients========= */
+
+.ingredients__section{
+    background-color: #3282F7;
+    padding: 2% 2%;
+    border-radius: 5px;
+    list-style: none;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ==============Appareil========= */
+.appareils__section{
+    background-color: #68D9A4;
+    padding: 2% 2%;
+    border-radius: 5px;
+    list-style: none;
+    margin: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /* ==============Ustensils========= */
 
-.ustensils{
+.ustensils__section{
     background-color: #ED6454;
     padding: 2% 2%;
     border-radius: 5px;
     list-style: none;
     margin: 0 20px;
     height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
-.list__block--ustensils{
-    display: none;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 3%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    
+
+/* ==============Arrow========= */
+
+.arrow__btn{
+    background: none;
+    border: none;
+    vertical-align: middle;
+}
+.arrow{
+    width: 20px;
+    height: 20px;
+    transition: transform 300ms ease-in-out
+}
+.arrowUp{
+    transform: rotateX(180deg);
 }
 
 /* ==============tags========= */

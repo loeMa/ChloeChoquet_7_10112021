@@ -154,7 +154,7 @@ let ingredientlistRequete = [];
 let appareilslistRequete = [];
 let ustensilslistRequete = [];
 let spanTarget = [];
-let span;
+let spans;
 
 //==============tableau data=====================
 
@@ -206,10 +206,10 @@ const filterRecipe = (filters) =>{
                 return ingredientlistRequete, appareilslistRequete, ustensilslistRequete;
 
             }if(filter.type == "ingredients" ){
-                span.forEach((item) =>{
-                    let spanResult = item.id.includes(filterValue); 
+                spans.forEach((span) =>{
+                    let spanResult = span.id.includes(filterValue); 
                     if(spanResult){
-                        spanTarget.push(item);
+                        spanTarget.push(span);
                     } 
                 }) 
                 for(let i of ingredientFilter){
@@ -223,24 +223,19 @@ const filterRecipe = (filters) =>{
                     }
                 } 
             }if(filter.type == "appareils" && recette.appliance.includes(filter.value) ){
-                //arrayAppliances= [recette.appliance];
-                span.forEach((item) =>{
-                    let spanResult = item.id.includes(filter.value); 
+                spans.forEach((span) =>{
+                    let spanResult = span.id.includes(filter.value); 
                     if(spanResult){
-                        spanTarget.push(item);
+                        spanTarget.push(span);
                     }
                 })
                 return true;
 
             }if(filter.type == "ustensils" && recette.ustensils.includes(filter.value) ){
-                //arrayUstensils= [recette.ustensils];
-                /* recette.ustensils.forEach(e =>{
-                    arrayUstensils.push(e)
-                }) */
-                span.forEach((item) =>{
-                    let spanResult = item.id.includes(filter.value); 
+                spans.forEach((span) =>{
+                    let spanResult = span.id.includes(filter.value); 
                     if(spanResult){
-                        spanTarget.push(item);
+                        spanTarget.push(span);
                     }
                 })
                 return true;
@@ -267,20 +262,18 @@ const filterRecipe = (filters) =>{
 //===========declaration variables===============
 
 const dropdownIngredBtn = document.querySelector('#arrow1__btn');
-const dropdownIngredUl = document.querySelector('.dropdownIngred__list');
-const ingredientBlock = document.querySelector('.dropdownIngred')
+const dropdownIngredUl = document.querySelector('#ingredientsBlock');
+const ingredientBlock = document.querySelector('.ingredients__section')
 const arrow1 = document.getElementById('arrow1');
-const arrowUp = document.querySelector('arrowUp');
 const appareilBtn = document.querySelector('#arrow2__btn');
 const arrow2 = document.getElementById('arrow2');
-const listBlockAppareil = document.querySelector('.list__block');
-const listBlockUstensils = document.querySelector('.list__block--ustensils');
+const listBlockAppareil = document.querySelector('#appliancesBlock');
+const listBlockUstensils = document.querySelector('#ustensilsBlock');
 const ustensilsBtn = document.querySelector('#arrow3__btn');
 const arrow3 = document.getElementById('arrow3');
 const filterTagBlock = document.querySelector('.filterTag');
-const btnSearch = document.querySelector('.dropdownIngred__search');
-const appareilBlock = document.querySelector('.appareil');
-const ustensilsBlock = document.querySelector('.ustensils')
+const appareilBlock = document.querySelector('.appareils__section');
+const ustensilsBlock = document.querySelector('.ustensils__section')
 
 let filtersArray = [];
 let filtersBox = {};
@@ -295,9 +288,9 @@ addSpan()
 
 //===========au click des filtres générique===============
 function openFilters(input, arrow, block, list){
-    input.addEventListener('click', (e) =>{
+    input.addEventListener('click', () =>{
         arrow.classList.toggle('arrowUp');
-        //console.log(span)
+
         if(arrow.classList.contains('arrowUp')){
             block.style.display = 'grid';
             list.style.height = "100%";
@@ -327,9 +320,9 @@ input.addEventListener('input', (e) =>{
     if(e.target.value.length >= 3){
         filtersBox = {'type' : e.target.classList[1], 'value' : e.target.value};
         filtersArray.push(filtersBox);
-        let newTest = filterRecipe(filtersArray);
-        span.forEach((e) =>{
-            e.remove();
+        filterRecipe(filtersArray);
+        spans.forEach((span) =>{
+            span.remove();
         })
         if(e.target.placeholder === 'Appareils'){
             arrow2.classList.toggle('arrowUp');
@@ -365,32 +358,11 @@ input.addEventListener('input', (e) =>{
 })
 })
 
-/* btnSearch.addEventListener('input', (e) =>{
-
-    if(e.target.value.length >= 3){
-        filtersBox = {'type' : e.target.classList[1], 'value' : e.target.value};
-        filtersArray.push(filtersBox);
-        let newTest = filterRecipe(filtersArray);
-        arrow1.classList.toggle('arrowUp');
-        dropdownIngredUl.style.display = 'grid';
-        span.forEach((e) =>{
-            e.remove();
-        })
-        domSpan(ingredientlistRequete, dropdownIngredUl, 'ingredients');
-        addSpan();
-        
-    }else{
-        dropdownIngredUl.style.display = 'none';
-        
-    }
-    console.log(e.target.value)
-}) */
-
 //===========pour chaque span on lance displayTag===============
 
 function addSpan(){
-    span.forEach((e) =>{ 
-        DisplayTag(e);
+    spans.forEach((span) =>{ 
+        DisplayTag(span);
     })
 }
 
@@ -409,15 +381,15 @@ function tagDom(data){
 function DisplayTag(data){
 
     data.addEventListener('click', (i) =>{
-        span.forEach((e) =>{
-            e.remove();
+        spans.forEach((span) =>{
+            span.remove();
         })
         arrayInput.push(data);
 
         filtersBox = {'type' : i.target.classList[1], 'value' : i.target.value};
         filtersArray.push(filtersBox);
         let newTest = filterRecipe(filtersArray);
-console.log(inputSearch)
+
         tagDom(i);
         inputSearch.forEach(input => input.value = "")
         const tagClose = document.querySelectorAll('.filterTag--close');
@@ -427,9 +399,8 @@ console.log(inputSearch)
                 let idInput = arrayInput.find((input) => input.id == event.parentNode.value);
                 idInput.style.display = "block";
                 idInput.checked = false; 
-                //console.log(idInput)
-                span.forEach((e) =>{
-                    e.remove();
+                spans.forEach((span) =>{
+                    span.remove();
                 })
                 filtersArray = filtersArray.filter((item) => item.value != event.parentNode.value );
                 console.log(filtersArray)
@@ -458,7 +429,6 @@ let limited = [];
             spanTarget.forEach(e => {
                 if(span.id === e.id){
                     span.style.display = 'none'
-                    //console.log(spanTarget)
                 }
             }) 
         } 
@@ -466,6 +436,6 @@ let limited = [];
         ul.appendChild(span);
     })
      
-    span = document.querySelectorAll('.list__items');
+    spans = document.querySelectorAll('.list__items');
 }
 
