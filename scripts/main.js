@@ -354,7 +354,7 @@ input.addEventListener('input', (e) =>{
         listBlockUstensils.style.display = 'none';
         listBlockAppareil.style.display = 'none';
     }
-    console.log(e.target.value)
+    console.log(e.target.value);
 })
 })
 
@@ -403,7 +403,6 @@ function DisplayTag(data){
                     span.remove();
                 })
                 filtersArray = filtersArray.filter((item) => item.value != event.parentNode.value );
-                console.log(filtersArray)
                 filterRecipe(filtersArray); 
             })
         }) 
