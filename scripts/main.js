@@ -99,7 +99,7 @@ input.addEventListener('input', (e) =>{
 
 if(e.target.value.length >= 3){
     sectionRecipes.innerHTML = '';
-    let newData = findByOld(recipes, e.target.value);
+    let newData = findByLoop(recipes, e.target.value);
     displayRecipe(newData)
 }else{
     sectionRecipes.innerHTML = '';
@@ -109,7 +109,7 @@ if(e.target.value.length >= 3){
 
 //=============fonction tri avec l'input principal (for)==============
 
-function findByOld(data, requete){
+function findByLoop(data, requete){
     let arrtest = []
     for(let i in data){
         let arr = data[i];
