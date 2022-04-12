@@ -6,6 +6,36 @@ const sectionRecipes = document.querySelector('.recipes');
 const input = document.getElementById('inputSearch');
 const errorH2 = document.querySelector('.error');
 
+//==============list des appliances/ingredients/ustensils=====================
+
+let listAppliances = [];
+let listUstensils = [];
+let listIngredients = [];
+let arrayAppliances =  [];
+let arrayUstensils = [];
+let arrayIngredients = [];
+let ingredientlistRequete = [];
+let appareilslistRequete = [];
+let ustensilslistRequete = [];
+let spanTarget = [];
+let spans;
+
+//==============tableau liste tag=====================
+
+const arraySingleData = (data) =>{
+    listAppliances = [];
+    listUstensils = [];
+    listIngredients = [];
+    data.forEach((recette) => {
+        listAppliances.push(recette.appliance);
+        recette.ustensils.forEach((e) => listUstensils.push(e));
+        recette.ingredients.forEach((e) => listIngredients.push(e.ingredient));
+    })
+    arrayAppliances =  [...new Set(listAppliances)];
+    arrayUstensils = [...new Set(listUstensils)];
+    arrayIngredients = [...new Set(listIngredients)];
+}
+arraySingleData(recipes)
 
 //===========Création du DOM===============
 
@@ -100,11 +130,28 @@ displayRecipe(recipes);
 input.addEventListener('input', (e) =>{
     e.preventDefault();
     if(e.target.value.length >= 3){
-        
+        sectionRecipes.innerHTML = '';
+        spans.forEach((span) =>{
+            span.remove();
+        })
         let newData = findByPrincipal(recipes, e.target.value);
         displayRecipe(newData);
-    }else{
+        arraySingleData(newData);
+
+        domSpan(arrayAppliances, listBlockAppareil, 'appareils');
+        domSpan(arrayIngredients, dropdownIngredUl, 'ingredients');
+        domSpan(arrayUstensils, listBlockUstensils, 'ustensils');
+        addSpan();  
         
+    }else{
+        spans.forEach((span) =>{
+            span.remove();
+        })
+        arraySingleData(recipes);
+        domSpan(arrayAppliances, listBlockAppareil, 'appareils');
+        domSpan(arrayIngredients, dropdownIngredUl, 'ingredients');
+        domSpan(arrayUstensils, listBlockUstensils, 'ustensils');
+        addSpan();
         displayRecipe(recipes);
     }
 })
@@ -141,35 +188,6 @@ function findByPrincipal(data, requete){
             return resultTitle, resultDesc;
         })
     }
-
-
-//==============list des appliances/ingredients/ustensils=====================
-let listAppliances = [];
-let listUstensils = [];
-let listIngredients = [];
-let arrayAppliances =  [];
-let arrayUstensils = [];
-let arrayIngredients = [];
-let ingredientlistRequete = [];
-let appareilslistRequete = [];
-let ustensilslistRequete = [];
-let spanTarget = [];
-let spans;
-
-//==============tableau data=====================
-
-const arraySingleData = (data) =>{
-    data.forEach((recette) => {
-        listAppliances.push(recette.appliance);
-        recette.ustensils.forEach((e) => listUstensils.push(e));
-        recette.ingredients.forEach((e) => listIngredients.push(e.ingredient));
-    })
-    arrayAppliances =  [...new Set(listAppliances)];
-    arrayUstensils = [...new Set(listUstensils)];
-    arrayIngredients = [...new Set(listIngredients)];
-}
-arraySingleData(recipes);
-
 
 
 //==============Filtre par bouton tag=====================
@@ -290,7 +308,7 @@ addSpan()
 function openFilters(input, arrow, block, list){
     input.addEventListener('click', () =>{
         arrow.classList.toggle('arrowUp');
-
+        
         if(arrow.classList.contains('arrowUp')){
             block.style.display = 'grid';
             list.style.height = "100%";
@@ -383,7 +401,7 @@ function DisplayTag(data){
     data.addEventListener('click', (i) =>{
         spans.forEach((span) =>{
             span.remove();
-        })
+        });
         arrayInput.push(data);
 
         filtersBox = {'type' : i.target.classList[1], 'value' : i.target.value};
