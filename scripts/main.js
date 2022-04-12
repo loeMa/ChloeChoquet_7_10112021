@@ -110,7 +110,7 @@ if(e.target.value.length >= 3){
 //=============fonction tri avec l'input principal (for)==============
 
 function findByLoop(data, requete){
-    let arrtest = []
+    let arrayRecipes = []
     for(let i in data){
         let arr = data[i];
         let title = arr.name;
@@ -125,21 +125,21 @@ function findByLoop(data, requete){
             
             const resultIngred = ingred.toLowerCase().includes(requete.toLowerCase());
             if(resultIngred){
-                arrtest.push(data[i]);
+                arrayRecipes.push(data[i]);
                 console.log(data[i]);
             } 
         }
 
         if(resultTitle){
-            arrtest.push(data[i]);
-            console.log(title,arrtest);
+            arrayRecipes.push(data[i]);
+            console.log(title,arrayRecipes);
 
         }else if(resultDesc){
-            arrtest.push(data[i]);
+            arrayRecipes.push(data[i]);
         }
     }
-    console.log(arrtest);
-    return arrtest;
+    console.log(arrayRecipes);
+    return arrayRecipes;
 }
 
 
