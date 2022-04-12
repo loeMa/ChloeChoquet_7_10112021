@@ -110,70 +110,35 @@ if(e.target.value.length >= 3){
 //=============fonction tri avec l'input principal (filter)==============
 
 function findByPrincipal(data, requete){
-    if(requete.includes(' ')){
-        console.log('ya un espace')
-    }
-        return data.filter((el) =>{
-            let title = el.name;
-            let desc = el.description;
-            let ingred = el.ingredients;
-    
-            let resultTitle = title.toLowerCase().indexOf(requete.toLowerCase())!== -1;
-            let resultDesc = desc.toLowerCase().indexOf(requete.toLowerCase())!== -1;
-    
-            let resultIngred = ingred.map((i) => i.ingredient.toLowerCase().indexOf(requete.toLowerCase())!== -1);
-            if(resultIngred.includes(true)){
-                console.log(resultIngred, el)
-                return el
-            }  
-            
-            /* for(let i of ingred){
-                let listIngred = i.ingredient;
-                
-                const resultIngred = listIngred.toLowerCase().indexOf(requete.toLowerCase())!== -1;
-                if(resultIngred){
-                    return el
-                }
-            }   */ 
-    
-            return resultTitle, resultDesc ;
-        })
-    }
 
-//=============fonction tri avec l'input principal (for)==============
+    return data.filter((el) =>{
+        let title = el.name;
+        let desc = el.description;
+        let ingred = el.ingredients;
 
-function findByOld(data, requete){
-    let arrtest = []
-    for(let i in data){
-        let arr = data[i];
-        let title = arr.name;
-        let desc = arr.description;
-        let ListIngred = arr.ingredients;
+        let resultTitle = title.toLowerCase().indexOf(requete.toLowerCase())!== -1;
+        let resultDesc = desc.toLowerCase().indexOf(requete.toLowerCase())!== -1;
+
+        let resultIngred = ingred.map((i) => i.ingredient.toLowerCase().indexOf(requete.toLowerCase())!== -1);
+        if(resultIngred.includes(true)){
+            console.log(resultIngred, el)
+            return el
+        }  
         
-        const resultTitle = title.toLowerCase().includes(requete.toLowerCase());
-        const resultDesc = desc.toLowerCase().includes(requete.toLowerCase());
-
-        for(let j in ListIngred){
-            let ingred = ListIngred[j].ingredient;
+        /* for(let i of ingred){
+            let listIngred = i.ingredient;
             
-            const resultIngred = ingred.toLowerCase().includes(requete.toLowerCase());
+            const resultIngred = listIngred.toLowerCase().indexOf(requete.toLowerCase())!== -1;
             if(resultIngred){
-                arrtest.push(data[i]);
-                console.log(data[i]);
-            } 
-        }
+                return el
+            }
+        }   */ 
 
-        if(resultTitle){
-            arrtest.push(data[i]);
-            console.log(title,arrtest);
-
-        }else if(resultDesc){
-            arrtest.push(data[i]);
-        }
-    }
-    console.log(arrtest);
-    return arrtest;
+        return resultTitle, resultDesc ;
+    })
 }
+
+
 
 
 
