@@ -5,6 +5,7 @@ import {recipes} from './../data/recipes.js';
 const sectionRecipes = document.querySelector('.recipes');
 const input = document.getElementById('inputSearch');
 const errorH2 = document.querySelector('.error');
+let recettes = recipes;
 
 //==============list des appliances/ingredients/ustensils=====================
 
@@ -135,6 +136,7 @@ input.addEventListener('input', (e) =>{
             span.remove();
         })
         let newData = findByPrincipal(recipes, e.target.value);
+        recettes = newData;
         displayRecipe(newData);
         arraySingleData(newData);
 
@@ -146,8 +148,9 @@ input.addEventListener('input', (e) =>{
     }else{
         spans.forEach((span) =>{
             span.remove();
-        })
-        arraySingleData(recipes);
+        });
+        recettes= recipes
+        arraySingleData(recettes);
         domSpan(arrayAppliances, listBlockAppareil, 'appareils');
         domSpan(arrayIngredients, dropdownIngredUl, 'ingredients');
         domSpan(arrayUstensils, listBlockUstensils, 'ustensils');
@@ -159,9 +162,6 @@ input.addEventListener('input', (e) =>{
 //=============fonction tri avec l'input principal (filter)==============
 
 function findByPrincipal(data, requete){
-    if(requete.includes(' ')){
-        console.log('ya un espace');
-    }
         return data.filter((el) =>{
             let title = el.name;
             let desc = el.description;
@@ -193,7 +193,7 @@ function findByPrincipal(data, requete){
 //==============Filtre par bouton tag=====================
 
 const filterRecipe = (filters) =>{
-    let filtArr = recipes;
+    let filtArr = recettes;
     listIngredients = [];
     listAppliances = [];
     spanTarget = [];
@@ -403,10 +403,11 @@ function DisplayTag(data){
             span.remove();
         });
         arrayInput.push(data);
+        input.value = '';
 
         filtersBox = {'type' : i.target.classList[1], 'value' : i.target.value};
         filtersArray.push(filtersBox);
-        let newTest = filterRecipe(filtersArray);
+        filterRecipe(filtersArray);
 
         tagDom(i);
         inputSearch.forEach(input => input.value = "")
@@ -420,6 +421,9 @@ function DisplayTag(data){
                 spans.forEach((span) =>{
                     span.remove();
                 })
+                if(input.value == '' ){
+                    recettes = recipes;
+                }
                 filtersArray = filtersArray.filter((item) => item.value != event.parentNode.value );
                 filterRecipe(filtersArray); 
             })
