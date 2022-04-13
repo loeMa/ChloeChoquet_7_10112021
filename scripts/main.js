@@ -43,6 +43,7 @@ arraySingleData(recipes);
 const recipesDom = (data) =>{
 
     const article = document.createElement('article');
+    const divImg = document.createElement('div');
     const imgArticle = document.createElement('img');
     const titleDiv = document.createElement('div');
     const titleRecipe = document.createElement('h2');
@@ -58,6 +59,7 @@ const recipesDom = (data) =>{
     titleDiv.classList.add('recipes__article__title');
     contentDiv.classList.add('recipes__article__content');
     descriptionDiv.classList.add('recipes__article__description');
+    divImg.classList.add("recipes__article__image");
     
     imgArticle.alt = "";
     
@@ -68,30 +70,25 @@ const recipesDom = (data) =>{
     
     data.ingredients.forEach((e) =>{
         const ingredientText = document.createElement('div');
-        const ingredientH3 = document.createElement('h3');
-        const ingredientContent = document.createElement('p');
         ingredientText.classList.add('recipes__article__content--ingredient');
 
         ingredientDiv.appendChild(ingredientText);
-        ingredientText.appendChild(ingredientH3);
-        ingredientText.appendChild(ingredientContent);
-
-        ingredientH3.innerHTML = e.ingredient;
 
         if(e.quantity === undefined ){
-            ingredientContent.innerHTML = ``;
+            ingredientText.innerHTML = ``;
         }else if(e.unit === undefined){
-            ingredientContent.innerHTML = `: ${e.quantity}`;
+            ingredientText.innerHTML = `<h3>${e.ingredient} :</h3> <p>${e.quantity}</p>`;
         }else if(e.unit === 'grammes'){
             e.unit = 'g';
-            ingredientContent.innerHTML = ` : ${e.quantity} ${e.unit}`;
+            ingredientText.innerHTML = `<h3>${e.ingredient} :</h3> <p>${e.quantity} ${e.unit}</p>`;
         }else{
-            ingredientContent.innerHTML = ` : ${e.quantity} ${e.unit}`;
+            ingredientText.innerHTML = `<h3>${e.ingredient} :</h3> <p>${e.quantity} ${e.unit}</p>`;
         }
     })
     
     sectionRecipes.appendChild(article);
-    article.appendChild(imgArticle);
+    article.appendChild(divImg);
+    divImg.appendChild(imgArticle);
     article.appendChild(titleDiv);
     article.appendChild(contentDiv);
     titleDiv.appendChild(titleRecipe);

@@ -91,7 +91,7 @@ h1{
     min-width: 400px;
 }
 
-.recipes__article img{
+.recipes__article__image{
     height: 200px;
     width: 100%;
     background-color: #C7BEBE;
@@ -109,6 +109,7 @@ h1{
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 18px;
+    flex-basis: 220px;
 }
 
 .recipes__article__title span{
@@ -149,14 +150,13 @@ h1{
     overflow: hidden;
 }
 
-.recipes__article__content--ingredient {
-    display: block ruby;
-}
+
 
 .recipes__article__content--ingredient h3, p{
     margin: 0 2px;
     font-size: 12px;
     font-family: 'Lato', sans-serif;
+    display: inline;
 }
 
 @media (max-width: 992px) {

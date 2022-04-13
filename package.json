@@ -1,0 +1,26 @@
+{
+  "name": "chloechoquet_7_10112021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prefix": "postcss ./css/style.css --use autoprefixer -d ./css/prefixed/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loeMa/https---github.com-loeMa-ChloeChoquet_7_10112021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": "last 4 versions",
+  "bugs": {
+    "url": "https://github.com/loeMa/https---github.com-loeMa-ChloeChoquet_7_10112021/issues"
+  },
+  "homepage": "https://github.com/loeMa/https---github.com-loeMa-ChloeChoquet_7_10112021#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "postcss-cli": "^9.1.0"
+  }
+}
