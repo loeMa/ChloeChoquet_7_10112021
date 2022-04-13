@@ -88,6 +88,7 @@ h1{
     width: 26%;
     background-color: #E7E7E7;
     margin: 2% 0;
+    min-width: 400px;
 }
 
 .recipes__article img{
@@ -104,10 +105,20 @@ h1{
     padding: 0 20px;
 }
 
+.recipes__article__title h2{
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
 .recipes__article__title span{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.recipes__article__title span h2{
+    font-weight: 700;
 }
 
 .recipes__article__title img{
@@ -234,6 +245,7 @@ h1{
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    margin: 0 20px 0 0;
 }
 
 /* ==============Appareil========= */

@@ -36,7 +36,7 @@ const arraySingleData = (data) =>{
     arrayUstensils = [...new Set(listUstensils)];
     arrayIngredients = [...new Set(listIngredients)];
 }
-arraySingleData(recipes)
+arraySingleData(recipes);
 
 //===========Création du DOM===============
 
@@ -263,7 +263,6 @@ const filterRecipe = (filters) =>{
                 return true;
 
             }else{
-                console.log('pas bien');
                 return false;
             }
         })
@@ -285,7 +284,7 @@ const filterRecipe = (filters) =>{
 
 const dropdownIngredBtn = document.querySelector('#arrow1__btn');
 const dropdownIngredUl = document.querySelector('#ingredientsBlock');
-const ingredientBlock = document.querySelector('.ingredients__section')
+const ingredientBlock = document.querySelector('.ingredients__section');
 const arrow1 = document.getElementById('arrow1');
 const appareilBtn = document.querySelector('#arrow2__btn');
 const arrow2 = document.getElementById('arrow2');
@@ -295,7 +294,7 @@ const ustensilsBtn = document.querySelector('#arrow3__btn');
 const arrow3 = document.getElementById('arrow3');
 const filterTagBlock = document.querySelector('.filterTag');
 const appareilBlock = document.querySelector('.appareils__section');
-const ustensilsBlock = document.querySelector('.ustensils__section')
+const ustensilsBlock = document.querySelector('.ustensils__section');
 
 let filtersArray = [];
 let filtersBox = {};
@@ -371,13 +370,12 @@ input.addEventListener('input', (e) =>{
             
         }
         addSpan();
-    }else{
-        dropdownIngredUl.style.display = 'none';
-        listBlockUstensils.style.display = 'none';
-        listBlockAppareil.style.display = 'none';
-    }
-    console.log(e.target.value);
-})
+        }else{
+            dropdownIngredUl.style.display = 'none';
+            listBlockUstensils.style.display = 'none';
+            listBlockAppareil.style.display = 'none';
+        }
+    })
 })
 
 //===========pour chaque span on lance displayTag===============
@@ -407,14 +405,13 @@ function DisplayTag(data){
             span.remove();
         });
         arrayInput.push(data);
-        //input.value = '';
 
         filtersBox = {'type' : i.target.classList[1], 'value' : i.target.value};
         filtersArray.push(filtersBox);
         filterRecipe(filtersArray);
 
         tagDom(i);
-        inputSearch.forEach(input => input.value = "")
+        inputSearch.forEach(input => input.value = "");
         const tagClose = document.querySelectorAll('.filterTag--close');
         tagClose.forEach((event) =>{
             event.addEventListener('click', () =>{
@@ -453,7 +450,7 @@ let limited = [];
         if(data === arrayAppliances || data === arrayIngredients || data === arrayUstensils){
             spanTarget.forEach(e => {
                 if(span.id === e.id){
-                    span.style.display = 'none'
+                    span.style.display = 'none';
                 }
             }) 
         } 
