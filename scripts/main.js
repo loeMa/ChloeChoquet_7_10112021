@@ -145,12 +145,16 @@ input.addEventListener('input', (e) =>{
         domSpan(arrayUstensils, listBlockUstensils, 'ustensils');
         addSpan();  
         
-    }else{
+    }else if(filtersBox != [] && e.target.value.length === 0){
+        recettes = recipes;
+        filterRecipe(filtersArray);
+
+    }else if(filtersBox === [] && e.target.value.length === 0){
         spans.forEach((span) =>{
             span.remove();
         });
-        recettes= recipes
-        arraySingleData(recettes);
+
+        arraySingleData(recipes);
         domSpan(arrayAppliances, listBlockAppareil, 'appareils');
         domSpan(arrayIngredients, dropdownIngredUl, 'ingredients');
         domSpan(arrayUstensils, listBlockUstensils, 'ustensils');
@@ -403,7 +407,7 @@ function DisplayTag(data){
             span.remove();
         });
         arrayInput.push(data);
-        input.value = '';
+        //input.value = '';
 
         filtersBox = {'type' : i.target.classList[1], 'value' : i.target.value};
         filtersArray.push(filtersBox);

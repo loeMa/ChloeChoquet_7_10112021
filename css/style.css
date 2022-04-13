@@ -77,6 +77,7 @@ h1{
     position: absolute;
     top: 400px;
     margin: 5% 100px 5% 0;
+    min-width: 200px;
 }
 
 .recipes__article{
